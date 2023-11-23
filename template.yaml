@@ -1,13 +1,48 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: ccreate-aws-vm-template
-  title: create-aws-vm Template
-  description: Create an AWS EC2 instance using Terraform
+  name: create-react-app-template
+  title: Create React App Template
+  description: Create a new CRA website project
   tags:
-    - terraform
-    - github
-steps:
+    - react
+    - cra
+spec:
+  owner: dpogula
+  type: infrastructure
+  parameters:
+    - title: Provide some simple information
+      required:
+        - region
+        - owner
+      properties:
+        region:
+          title: Name
+          type: string
+          description: Unique name of the component
+          ui:field: EntityNamePicker
+
+        owner:
+          title: Owner
+          type: string
+          description: Owner of the component
+          ui:field: OwnerPicker
+          ui:options:
+            allowedKinds:
+              - Group
+    - title: Choose a location
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+  steps:
+    steps:
   - id: terraform-init
     name: Terraform Init
     command: |
@@ -17,9 +52,17 @@ steps:
     name: Terraform Plan
     command: |
       cd ${{ input.workDir }}/terraform
-      terraform plan -var="region=${{ input.parameters.region }}"
+      terraform plan -var="region=${{ parameters.region }}"
   - id: terraform-apply
     name: Terraform Apply
     command: |
       cd ${{ input.workDir }}/terraform
-      terraform apply -auto-approve -var="region=${{ input.parameters.region }}"
+      terraform apply -auto-approve -var="region=${{ parameters.region }}"
+
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps.publish.output.remoteUrl }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps.register.output.entityRef }}
