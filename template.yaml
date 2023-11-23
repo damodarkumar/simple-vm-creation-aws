@@ -19,17 +19,10 @@ spec:
         region:
           title: Name
           type: string
-          description: Unique name of the component
+          description: provide the aws region to provision infra
           ui:field: EntityNamePicker
 
-        owner:
-          title: Owner
-          type: string
-          description: Owner of the component
-          ui:field: OwnerPicker
-          ui:options:
-            allowedKinds:
-              - Group
+       
     - title: Choose a location
       required:
         - repoUrl
