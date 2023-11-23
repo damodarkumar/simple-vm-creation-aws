@@ -1,4 +1,4 @@
-apiVersion: scaffolder.backstage.io/v1beta3
+oapiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: simple-vm-infra-aws
@@ -17,7 +17,7 @@ spec:
         - owner
       properties:
         region:
-          title: Name
+          title: region
           type: string
           description: provide the aws region to provision infra
           ui:field: EntityNamePicker
