@@ -52,11 +52,11 @@ spec:
       command: |
         cd ${{ input.workDir }}/terraform
         terraform plan -var="region=${{ parameters.region }}"
-     - id: terraform-apply
-       name: Terraform Apply
-       command: |
-         cd ${{ input.workDir }}/terraform
-         terraform apply -auto-approve -var="region=${{ parameters.region }}"
+    - id: terraform-apply
+      name: Terraform Apply
+      command: |
+        cd ${{ input.workDir }}/terraform
+        terraform apply -auto-approve -var="region=${{ parameters.region }}"
 
   output:
     links:
