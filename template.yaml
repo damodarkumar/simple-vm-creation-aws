@@ -1,12 +1,12 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: create-react-app-template
-  title: Create React App Template
-  description: Create a new CRA website project
+  name: simple-vm-infra-aws
+  title: Create vm on aws
+  description: Create a new vm on aws
   tags:
-    - react
-    - cra
+    - aws
+    - terraform
 spec:
   owner: dpogula
   type: infrastructure
