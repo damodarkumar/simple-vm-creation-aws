@@ -44,16 +44,19 @@ spec:
   steps:
     - id: terraform-init
       name: Terraform Init
+      action: terraforminit:init
       command: |
         cd ${{ input.workDir }}/terraform
         terraform init
     - id: terraform-plan
       name: Terraform Plan
+      action: terraformplan:plan
       command: |
         cd ${{ input.workDir }}/terraform
         terraform plan -var="region=${{ input.parameters.region }}"
-    - id: terraform-apply
+    - id: terraformapply:apply
       name: Terraform Apply
+      action: terraform:template
       command: |
         cd ${{ input.workDir }}/terraform
         terraform apply -auto-approve -var="region=${{ input.parameters.region }}"
