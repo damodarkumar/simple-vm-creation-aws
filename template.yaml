@@ -23,17 +23,6 @@ spec:
           ui:field: EntityNamePicker
 
        
-    - title: Choose a location
-      required:
-        - repoUrl
-      properties:
-        repoUrl:
-          title: Repository Location
-          type: string
-          ui:field: RepoUrlPicker
-          ui:options:
-            allowedHosts:
-              - github.com
   steps:
     - id: terraform-init
       name: Terraform Init
@@ -54,10 +43,4 @@ spec:
         cd ${{ input.workDir }}/terraform
         terraform apply -auto-approve -var="region=${{ input.parameters.region }}"
 
-  output:
-    links:
-      - title: Repository
-        url: ${{ steps.publish.output.remoteUrl }}
-      - title: Open in catalog
-        icon: catalog
-        entityRef: ${{ steps.register.output.entityRef }}
+  
