@@ -1,8 +1,8 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: your-component
-  description: Your component description
+  name: infra-on-aws
+  description: infra-on-aws
   annotations:
     github.com/project-slug: damodarkumar/simple-vm-creation-aws
     backstage.io/techdocs-ref: dir:.
