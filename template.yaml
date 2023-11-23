@@ -43,20 +43,20 @@ spec:
               - github.com
   steps:
     - id: terraform-init
-    name: Terraform Init
-    command: |
+      name: Terraform Init
+      command: |
       cd ${{ input.workDir }}/terraform
       terraform init
-  - id: terraform-plan
-    name: Terraform Plan
-    command: |
+    - id: terraform-plan
+      name: Terraform Plan
+      command: |
       cd ${{ input.workDir }}/terraform
       terraform plan -var="region=${{ parameters.region }}"
-  - id: terraform-apply
-    name: Terraform Apply
-    command: |
-      cd ${{ input.workDir }}/terraform
-      terraform apply -auto-approve -var="region=${{ parameters.region }}"
+     - id: terraform-apply
+       name: Terraform Apply
+       command: |
+       cd ${{ input.workDir }}/terraform
+       terraform apply -auto-approve -var="region=${{ parameters.region }}"
 
   output:
     links:
