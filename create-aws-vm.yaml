@@ -1,0 +1,19 @@
+specversion: v1
+id: create-aws-vm
+description: Create an AWS EC2 instance using Terraform
+steps:
+  - id: terraform-init
+    name: Terraform Init
+    command: |
+      cd ${{ input.workDir }}/terraform
+      terraform init
+  - id: terraform-plan
+    name: Terraform Plan
+    command: |
+      cd ${{ input.workDir }}/terraform
+      terraform plan -var="region=${{ input.parameters.region }}"
+  - id: terraform-apply
+    name: Terraform Apply
+    command: |
+      cd ${{ input.workDir }}/terraform
+      terraform apply -auto-approve -var="region=${{ input.parameters.region }}"

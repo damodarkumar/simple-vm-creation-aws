@@ -1,0 +1,7 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: your-component
+  description: Your component description
+  annotations:
+    backstage.io/managed-by-location: url:https://github.com/your-organization/your-repo/tree/main/.backstage
