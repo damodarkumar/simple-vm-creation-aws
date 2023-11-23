@@ -1,6 +1,12 @@
-specversion: v1
-id: create-aws-vm
-description: Create an AWS EC2 instance using Terraform
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: ccreate-aws-vm-template
+  title: create-aws-vm Template
+  description: Create an AWS EC2 instance using Terraform
+  tags:
+    - terraform
+    - github
 steps:
   - id: terraform-init
     name: Terraform Init
