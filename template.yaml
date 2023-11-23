@@ -42,8 +42,7 @@ spec:
             allowedHosts:
               - github.com
   steps:
-    steps:
-  - id: terraform-init
+    - id: terraform-init
     name: Terraform Init
     command: |
       cd ${{ input.workDir }}/terraform
