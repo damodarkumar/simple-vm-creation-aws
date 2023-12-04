@@ -20,11 +20,11 @@ spec:
     - environment
     properties:
       projectname:
-        title: Organization
+        title: projectname
         type: string
         description: The Pulumi organization to use for the Pulumi project
       buildversion:
-        title: Region
+        title: buildversion
         type: string
         description: |
           The region to deploy the virtual machine to
