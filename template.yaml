@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: vm-classic
-  title: Create a new Virtual Machine
+  title: Create a new VM on OpenStack
   description: |
     A template for creating a new Virtual Machine via gitlab.
   tags:
