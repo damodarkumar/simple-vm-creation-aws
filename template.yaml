@@ -13,7 +13,7 @@ spec:
   owner: group:infrastructure
   type: infrastructure
   parameters:
-  - title: Configure Pulumi template
+  - title: Configure template
     required:
     - projectname
     - buildversion
@@ -22,12 +22,12 @@ spec:
       projectname:
         title: projectname
         type: string
-        description: The Pulumi organization to use for the Pulumi project
+        description: The project name
       buildversion:
         title: buildversion
         type: string
         description: |
-          The region to deploy the virtual machine to
+          Just give the version number
       environment:
         title: Select stack
         type: string
@@ -39,7 +39,7 @@ spec:
         - Development
         - Staging
         - Production
-        description: The pulumi stack to use
+        description: The stack to use
   - title: Choose a GitHub repository location
     required:
     - repoUrl
@@ -53,7 +53,7 @@ spec:
           - github.com
   steps:
   - id: pulumi-new-component
-    name: Create new Pulumi component
+    name: Create new vm on openstack
     action: gitlab:pipeline:invoke
     input:
       name: ${{parameters.projectname}}
@@ -106,10 +106,4 @@ spec:
     links:
     - title: Open the Source Code Repository
       url: ${{ steps['publish'].output.repoContentsUrl }}
-    - title: Open the Catalog Info Component
-      icon: catalog
-      entityRef: ${{ steps['register'].output.entityRef }}
-    - title: IP Address
-      url: ${{ steps['pulumi-deploy-infrastructure'].output.ip }}
-    - title: URL
-      url: ${{ steps['pulumi-deploy-infrastructure'].output.url }}
+    
