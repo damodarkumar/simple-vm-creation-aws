@@ -23,6 +23,14 @@ spec:
         title: projectname
         type: string
         description: The project name
+        enum:
+        - ProjectA
+        - ProjectB        
+        enumNames:
+        - ProjectA
+        - ProjectB
+
+        description: Select Project Name
       buildversion:
         title: buildversion
         type: string
@@ -32,14 +40,13 @@ spec:
         title: Select stack
         type: string
         enum:
-        - dev
-        - staging
-        - prod
+        - AB
+        - CD
         enumNames:
         - Development
         - Staging
         - Production
-        description: The stack to use
+        description: Select version
   - title: Choose a GitHub repository location
     required:
     - repoUrl
