@@ -24,12 +24,20 @@ spec:
         type: string
         ui:field: EntityPicker
         description: Unique name of the terraform-aws project.
+        enum:
+        - ProjectA
+        - ProjectB
+        - ProjectC
+        default: ProjectA
         
       buildversion:
         title: Build Version
         type: string
         ui:field: EntityPicker
         description: build version of the project.
+        enum:
+        - v1.1
+        default: v1.o
         
       environment:
         title: Environment Stack
