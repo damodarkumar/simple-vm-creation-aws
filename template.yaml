@@ -46,7 +46,7 @@ spec:
       project_name: ${{parameters.projectname}}
       build_version: ${{parameters.buildversion}}
       environment: ${{parameters.environment}}
-      handler: 'file://./actions/invokePipeline.ts'
+      handler: 'file://./actions/invokePipeline2.ts'
       description: Action to invoke GitLab pipeline
       type: button
       icon: play
