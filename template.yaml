@@ -20,19 +20,19 @@ spec:
     - environment
     properties:
       projectname:
-        title: projectname
+        title: Project Name
         type: string
         ui:field: EntityPicker
         description: Unique name of the terraform-aws project.
         
       buildversion:
-        title: buildversion
+        title: Build Version
         type: string
         ui:field: EntityPicker
         description: build version of the project.
         
       environment:
-        title: environment
+        title: Environment Stack
         type: string
         ui:field: EntityPicker
         description: environment selection
