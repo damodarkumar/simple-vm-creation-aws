@@ -1,116 +1,53 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: vm-classic
-  title: Create a new VM on OpenStack
+  name: vm-on-aws-tf-backstage
+  title: Create a new Virtual Machine on AWS
   description: |
-    A template for creating a new Virtual Machine via gitlab.
+    A template for creating a new Virtual Machine via terraform.
   tags:
-  - gitlab
   - terraform
+  - vm
   - aws
 spec:
   owner: group:infrastructure
   type: infrastructure
   parameters:
-  - title: vm creation via gitlab
+  - title: Provide project information
     required:
     - projectname
     - buildversion
     - environment
     properties:
       projectname:
-        title: projectname
+        title: Name
         type: string
-        description: The project name
-        enum:
-        - ProjectA
-        - ProjectB        
-        enumNames:
-        - ProjectA
-        - ProjectB
-
-        description: Select Project Name
+        description: Unique name of the terraform-aws project.
+        ui:
+          field: EntityNamePicker
       buildversion:
-        title: buildversion
+        title: Description
         type: string
-        description: |
-          Just give the version number
+        description: build version of the project.
       environment:
-        title: Select stack
+        title: Environment
         type: string
+        description: environment selection
         enum:
-        - AB
-        - CD
-        enumNames:
         - Development
         - Staging
         - Production
-        description: Select version
-  - title: Choose a GitHub repository location
-    required:
-    - repoUrl
-    properties:
-      repoUrl:
-        title: Repository Location
-        type: string
-        ui:field: RepoUrlPicker
-        ui:options:
-          allowedHosts:
-          - github.com
+        default: Development
   steps:
-  - id: gitlab-new-component
-    name: Create new vm on openstack
+  - id: invoke-gitlab-ci-yaml
+    name: Invoke GitLab CI Yaml with input parameters
     action: gitlab:pipeline:invoke
     input:
-      name: ${{parameters.projectname}}
-      description: ${{parameters.buildversion}}
-      stack: ${{parameters.environment}}
+      project_name: ${{parameters.projectname}}
+      build_version: ${{parameters.buildversion}}
+      environment: ${{parameters.environment}}
+      handler: 'file://./actions/invokePipeline.ts'
+      description: Action to invoke GitLab pipeline
+      type: button
+      icon: play
 
-
-  - id: wait
-    name: Wait for template to be fetched
-    action: debug:wait
-    input:
-      seconds: 10
-      
-  - id: template
-    name: Render the Backstage template
-    action: fetch:template
-    input:
-      url: ./template
-      values:
-        projectname: "${{ parameters.projectname }}"
-        buildversion: ${{ parameters.buildversion }}
-        environment: ${{ parameters.environment }}
-
-  - id: publish
-    name: Publish to GitHub
-    action: publish:github
-    input:
-      allowedHosts: ["github.com"]
-      repoVisibility: public
-      description: "This repository contains the infrastructure code for the ${{ parameters.projectname }} component"
-      repoUrl: ${{ parameters.repoUrl }}
-      defaultBranch: main
-      requiredApprovingReviewCount: 0
-      protectDefaultBranch: false
-
-  - id: wait-again
-    name: Wait for the repository to be created
-    action: debug:wait
-    input:
-      seconds: 5
-
-  - id: register
-    name: Registering the Catalog Info Component
-    action: catalog:register
-    input:
-      repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
-      catalogInfoPath: '/catalog-info.yaml'
-
-  output:
-    links:
-    - title: Open the Source Code Repository
-      url: ${{ steps['publish'].output.repoContentsUrl }}
-    
